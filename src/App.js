@@ -1,6 +1,6 @@
 import './App.css';
 import CameraCapture from './CameraCapture.jsx';
-import { createUser, uploadImages, submitSession, getSessionResult } from './api';
+import { createUser, uploadImages, submitSession } from './api';
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -32,12 +32,6 @@ function App() {
     }
   }, [backImage, userSession?.id]);
 
-  useEffect(() => {
-    if (selfiImage) {
-      const result = uploadImages(selfiImage, userSession?.id, 'face');
-      console.log("Printing selfi Res", result);
-    }
-  }, [selfiImage, userSession?.id])
 
   const submitting = async () => {
     setLoading(true)
@@ -56,9 +50,8 @@ function App() {
         </div>
         {userSession?.url && <a href={userSession?.url} target='blank'>Click here To procced with verrif portal</a>}
       </div>
-      {userSession && <CameraCapture setFrontImage={setFrontImage} setBackImage={setBackImage} setSelfiImage={setSelfiImage} />}
+      {userSession && <CameraCapture sessionId={userSession?.id} setFrontImage={setFrontImage} setBackImage={setBackImage} setSelfiImage={setSelfiImage} />}
       {frontImage && backImage && selfiImage && (!loading ? <button onClick={() => submitting()}>Click to submit the images for verification</button> : <div>Loading ...</div>)}
-      {userSession?.id && <button onClick={() => getSessionResult(userSession?.id)}>Click to fetch the result</button>}
     </div>
   );
 }

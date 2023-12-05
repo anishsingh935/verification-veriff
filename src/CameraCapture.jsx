@@ -1,7 +1,8 @@
 // CameraCapture.js
 import React, { useRef, useState } from "react";
+import { uploadImages } from "./api";
 
-const CameraCapture = ({ setFrontImage, setBackImage, setSelfiImage }) => {
+const CameraCapture = ({ setFrontImage, setBackImage, setSelfiImage,sessionId }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -52,7 +53,7 @@ const CameraCapture = ({ setFrontImage, setBackImage, setSelfiImage }) => {
     }
   };
 
-  const capturePhoto = () => {
+  const capturePhoto = async () => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -68,6 +69,7 @@ const CameraCapture = ({ setFrontImage, setBackImage, setSelfiImage }) => {
     const base64Image = canvas.toDataURL("image/jpeg");
     console.log("Base64 Image:", base64Image);
     setSelfiImage(base64Image);
+    const getUploadResult = await uploadImages(base64Image, sessionId, 'selfi')
     setCaptured(true);
     setTimeout(() => {
       // Stop the camera stream

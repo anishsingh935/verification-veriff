@@ -1,3 +1,3 @@
 export const BASE_URL = 'https://stationapi.veriff.com'
-export const API_KEY = '7057e3b0-358d-4e52-9361-8a12138779e7'
-export const HMAC_SIGNATURE = '034c6da2bb31fd9e6892516c6d7b90ebe10f79b47cfb3d155d77b4d9b66e1d53'
+export const API_KEY = '9a0e442d-cf83-4891-bd80-93315b42dadf'
+export const API_SECRETE_KEY = 'ee963e07-9a29-4319-953e-c317739521ba'
